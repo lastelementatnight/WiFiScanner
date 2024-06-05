@@ -3,6 +3,7 @@
 ### Plan ###
 # 1. Check permissions (root) ✅
 # 2. Check avaiable WLAN NIC ✅
+#       2.1 CLIUI for set WLAN NIC  
 # 3. Set NIC
 # 4. Set NIC in monitor mode
 # 5. Start scanning with scappy or pywifi
@@ -12,7 +13,7 @@
 
 import signal
 import os
-import nic_service
+import nic_service as nics
 
 def keybord_interrupt_handler(interrupt_signal, frame):
     ### Keybord ctrl+c interrupt
@@ -27,15 +28,17 @@ def check_permissions():
         print("No permissions. Run as root!")
         exit()
 
-def list_NIC():
-    NIC = nic_service.list_interfaces()
-    print(NIC)
-
 def run_app():
     ### this run app
 
     check_permissions()
-    list_NIC()
+
+    wlan_nic = nics.list_interfaces()
+
+    for nic in wlan_nic:
+        print(nic)
+
+    nics.managed_mode(wlan_nic[0])
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, keybord_interrupt_handler)
