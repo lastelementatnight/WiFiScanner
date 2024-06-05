@@ -15,6 +15,7 @@ import signal
 import os
 import nic_service as nics
 import sniffing_service as sniffs
+from threading import Thread
 from scapy.layers.dot11 import Dot11, Dot11Beacon, Dot11ProbeResp, Dot11ProbeReq, Dot11Elt, sniff, RadioTap
 
 def keybord_interrupt_handler(interrupt_signal, frame):
@@ -42,6 +43,10 @@ def run_app():
 
     os.system(f"sudo airmon-ng check kill")
     nics.monitor_mode(wlan_nic[0])
+    
+    channel_changer = Thread(target=lambda: nics.change_wifi_channel(wlan_nic[0]))
+    channel_changer.daemon = True
+    channel_changer.start()
     
     sniff(prn=sniffs.eval_wifi_ap_packets, iface=wlan_nic[0])
     

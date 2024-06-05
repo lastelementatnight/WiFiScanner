@@ -2,6 +2,7 @@
 
 import subprocess
 import os
+from time import sleep
 
 def list_interfaces():
     iwconfig_result = subprocess.run(['iwconfig'], capture_output=True, text=True)
@@ -28,3 +29,15 @@ def managed_mode(interface):
     print(f"Interface {interface} set manged mode")
     os.system(f"sudo ip link set {interface} up")
     print(f"Interface {interface} up")
+    
+def change_wifi_channel(interface):
+    
+    print("Change channels for interface {}".format(interface))
+    
+    _channel = 1
+    
+    while True:
+       os.system(f"sudo iwconfig {interface} channel {_channel}")
+       _channel = _channel % 14+1
+       sleep(0.5)
+        
