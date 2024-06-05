@@ -38,21 +38,20 @@ wlan_list.set_index("BSSID", inplace=True)
 
 def eval_wifi_ap_packets(packet):
     if packet.haslayer(Dot11Beacon) or packet.haslayer(Dot11ProbeResp):
-        # if packet.type == 0 and packet.subtype == 8:
-            print("Start sniffing...")
+        if packet.type == 0 and packet.subtype == 8:
             bssid = packet[Dot11].addr2
             ssid = packet[Dot11Elt].info.decode().strip()
             net_stats = packet[Dot11Beacon].network_stats()
             channel = net_stats.get("channel")
             protocol = net_stats.get("crypto")
-            
+        
             wlan_list.loc[bssid] = (ssid, channel, protocol)
 
 def print_tabel():
     while True:
         os.system("clear")
         print(wlan_list)
-        time.sleep(0.5)
+        time.sleep(3)
 
 
 def run_app():
@@ -64,21 +63,19 @@ if __name__ == "__main__":
     signal.signal(signal.SIGINT, keybord_interrupt_handler)
     check_permissions()
     
+    wlan_nic = nics.list_interfaces()
+    os.system(f"sudo airmon-ng check kill")
+    nics.monitor_mode(wlan_nic[0])
+    
     printer_for_tabel = Thread(target=print_tabel)
     printer_for_tabel.daemon = True
     printer_for_tabel.start()
     
-    wlan_nic = nics.list_interfaces()
-
-    os.system(f"sudo airmon-ng check kill")
-    nics.monitor_mode(wlan_nic[0])
-    
-    # channel_changer = Thread(target=lambda: nics.change_wifi_channel(wlan_nic[0]))
-    channel_changer = Thread(target=eval_wifi_ap_packets)
+    channel_changer = Thread(target=lambda: nics.change_wifi_channel(wlan_nic[0]))
     channel_changer.daemon = True
     channel_changer.start()
     
-    sniff(prn=eval_wifi_ap_packets, iface=wlan_nic[0], store=0)
+    sniff(prn=eval_wifi_ap_packets, iface=wlan_nic[0])
     
-    os.system(f"sudo systemctl start NetworkManager.service")
-    nics.managed_mode(wlan_nic[0])
+    # os.system(f"sudo systemctl start NetworkManager.service")
+    # nics.managed_mode(wlan_nic[0])

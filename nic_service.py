@@ -31,13 +31,12 @@ def managed_mode(interface):
     print(f"Interface {interface} up")
     
 def change_wifi_channel(interface):
-    
-    print("Change channels for interface {}".format(interface))
-    
+
     _channel = 1
     
     while True:
-       os.system(f"sudo iwconfig {interface} channel {_channel}")
-       _channel = _channel % 14+1
-       sleep(0.5)
+        os.system(f"sudo airmon-ng check kill")
+        os.system(f"sudo iwconfig {interface} channel {_channel}")
+        _channel = _channel % 14+1
+        sleep(0.5)
         
