@@ -48,10 +48,12 @@ def eval_wifi_ap_packets(packet):
             wlan_list.loc[bssid] = (ssid, channel, protocol)
 
 def print_tabel():
+    r = 0
     while True:
+
         os.system("clear")
         print(wlan_list)
-        time.sleep(3)
+        time.sleep(0.5)
 
 
 def run_app():
