@@ -18,7 +18,7 @@ import signal
 import pandas as pd
 import nic_service as nics
 from threading import Thread
-from scapy.layers.dot11 import Dot11, Dot11Beacon, Dot11ProbeResp, Dot11Elt, sniff
+from scapy.layers.dot11 import Dot11, Dot11Beacon, Dot11ProbeResp, Dot11Elt, Dot11AssoReq, Dot11AssoResp,Dot11ProbeReq, sniff
 
 def keyboard_interrupt_handler(interrupt_signal, frame):
     ### Keybord ctrl+c interrupt
@@ -30,8 +30,10 @@ def check_permissions():
         print("No permissions. Run as root!")
         exit()
 
-wlan_list = pd.DataFrame(columns=["SSID", "channel", "crypto"])
+wlan_list = pd.DataFrame(columns=["SSID", "channel", "crypto", "clients"])
 wlan_list.index.name = "BSSID"
+
+clients_list = {}
 
 def eval_wifi_ap_packets(packet):
     if packet.haslayer(Dot11Beacon) or packet.haslayer(Dot11ProbeResp):
@@ -51,7 +53,20 @@ def eval_wifi_ap_packets(packet):
 
         channel = net_stats.get("channel")
         protocol = net_stats.get("crypto")
-        wlan_list.loc[bssid] = (ssid, channel, protocol)
+        wlan_list.loc[bssid] = (ssid, channel, protocol, clients_list.get(bssid, 0))
+
+    # Number of client in access Point
+    elif packet.haslayer(Dot11AssoReq) or packet.haslayer(Dot11AssoResp) or packet.haslayer  (Dot11ProbeReq):
+        client_mac = packet[Dot11].addr2
+        ap_mac = packet[Dot11].addr1
+            
+        if ap_mac in clients_list:
+            clients_list[ap_mac].add(client_mac)
+        else:
+            clients_list[ap_mac] = {client_mac}    
+            
+            if ap_mac in wlan_list.index:
+                wlan_list.at[ap_mac, 'clients'] = len(clients_list[ap_mac])
 
 def print_table(stdscr):
     curses.curs_set(0)
