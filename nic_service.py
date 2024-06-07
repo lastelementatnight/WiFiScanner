@@ -36,7 +36,7 @@ def change_wifi_channel(interface):
     
     while True:
         os.system(f"sudo airmon-ng check kill")
-        os.system(f"sudo iwconfig {interface} channel {_channel}")
-        _channel = _channel % 14+1
+        os.system(f"sudo iwconfig {interface} channel {_channel} 2>/dev/null")
+        _channel = _channel % 36+1
         sleep(0.5)
         
