@@ -47,9 +47,6 @@ def eval_wifi_ap_packets(packet):
             bssid = packet[Dot11].addr2
             if packet.haslayer(Dot11Elt):
                 ssid = packet[Dot11Elt].info.decode().strip()
-            else:
-                ssid = "SSID - N/A"
-            
             # Filter empty packet
             if packet.haslayer(Dot11Beacon):
                 net_stats = packet[Dot11Beacon].network_stats()
@@ -61,6 +58,7 @@ def eval_wifi_ap_packets(packet):
             channel = net_stats.get("channel")
             protocol = net_stats.get("crypto")
             wlan_list.loc[bssid] = (ssid, channel, protocol, clients_list.get(bssid, 0))
+            
             net_item = network_item()
             net_item._bssid = bssid
             net_item._ssid = ssid
@@ -81,28 +79,22 @@ def eval_wifi_ap_packets(packet):
                 if ap_mac in wlan_list.index:
                     wlan_list.at[ap_mac, 'clients'] = len(clients_list[ap_mac])
 
-def print_table(stdscr):
-    curses.curs_set(0)
-    stdscr.nodelay(1)  # No blocked std screen?
+def print_table():
     while True:
-        stdscr.clear()
-        stdscr.scrollok(True)
-        try:
-            stdscr.addstr(wlan_list.to_string())
-        except:
-            pass
-        stdscr.refresh()
-        time.sleep(0.5)
+        os.system("clear")
+        print(wlan_list.to_string())
+        time.sleep(0.8)
         
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, keyboard_interrupt_handler)
-    # check_permissions()
+    check_permissions()
     
     wlan_nic = nics.list_interfaces()
-    os.system("sudo airmon-ng check kill")
-    nics.monitor_mode(wlan_nic[0])
+    # os.system("sudo airmon-ng check kill 2 >> /dev/null")
+    # nics.monitor_mode(wlan_nic[0])
+    # os.system("sudo airmon-ng start wlp3s 2 >> /dev/null")
     
-    # printer_for_table = Thread(target=lambda: curses.wrapper(print_table))
+    # printer_for_table = Thread(target=print_table)
     # printer_for_table.daemon = True
     # printer_for_table.start()
     
@@ -112,7 +104,13 @@ if __name__ == "__main__":
     channel_changer.daemon = True
     channel_changer.start()
     
-    sniff(prn=eval_wifi_ap_packets, iface=wlan_nic[0])
+    sniff(prn=eval_wifi_ap_packets, iface=wlan_nic[0], count=100)
+    
+    i = 0
+    for x in network_list:
+        print(network_list[i]._ssid)
+        i+=1
+    
     
     # os.system("sudo systemctl start NetworkManager.service")
     # nics.managed_mode(wlan_nic[0])
