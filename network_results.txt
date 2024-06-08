@@ -1,0 +1,50 @@
+                                        SSID  channel               crypto  clients
+BSSID                                                                              
+a8:63:7d:f1:1e:e3            Forweb_kl021790        1           {WPA2/PSK}        0
+a8:63:7d:c3:4e:4d            Forweb_kl021686        1           {WPA2/PSK}        0
+a8:63:7d:f1:20:fb            Forweb_kl021844        4           {WPA2/PSK}        0
+5c:e9:31:74:1b:98            Forweb_kl023538        3           {WPA2/PSK}        0
+5e:e9:31:64:1b:98                                   3           {WPA2/PSK}        0
+a8:63:7d:e5:b7:ab       Forweb_kl022228_5GHz        4           {WPA2/PSK}        0
+a8:63:7d:c2:4b:7c                         BW        4           {WPA2/PSK}        0
+2a:66:e3:80:3f:95           PS4-AFB09A4004A4        6           {WPA2/PSK}        0
+a8:63:7d:f0:e5:e3            Forweb_kl021863        5           {WPA2/PSK}        0
+ac:15:a2:c7:ff:ce        ABW-woz-podsluchowy        7           {WPA2/PSK}        0
+ae:15:a2:a7:ff:ce                                   7  {WPA2/PSK, WPA/PSK}        0
+90:9a:4a:09:b7:cd            TP-Link_B7CD_Di        8  {WPA2/PSK, WPA/PSK}        0
+78:98:e8:69:3e:52            Forweb_kl022145        9           {WPA2/PSK}        0
+40:5f:7d:3d:67:b5            TCL-8HN5-2.4GHz        9           {WPA2/PSK}        0
+64:09:ac:4c:88:b0           HH71V1_88B0_2.4G        9  {WPA2/PSK, WPA/PSK}        0
+34:0a:33:a9:8d:29             Ciemna_NET_24G       13  {WPA2/PSK, WPA/PSK}        0
+e0:5a:9f:6b:77:c8           Forweb_ kl020629       13  {WPA2/PSK, WPA/PSK}        0
+78:98:e8:35:19:22            Forweb_kl021128        2           {WPA2/PSK}        0
+78:98:e8:69:ca:22            Forweb_kl022646        1           {WPA2/PSK}        0
+34:0a:33:a9:8a:66            Forweb_kl021598        9           {WPA2/PSK}        0
+a8:63:7d:f1:1e:c3               DIR-825-1EC0       13           {WPA2/PSK}        0
+bc:22:28:87:da:16          Grand_404_2.4_IOT        1           {WPA2/PSK}        0
+78:98:e8:67:1f:92                     CikaDe        1           {WPA2/PSK}        0
+bc:22:28:87:da:14              Grand_404_2.4        1           {WPA2/PSK}        0
+5a:e4:03:7a:84:93              Audi_MMI_9033        6           {WPA2/PSK}        0
+78:98:e8:69:64:a2            Forweb_kl022273        8           {WPA2/PSK}        0
+0c:0e:76:db:41:d3            Forweb_kl022550        1           {WPA2/PSK}        0
+34:0a:33:22:7e:e9             DWR-921-227EE8        5  {WPA2/PSK, WPA/PSK}        0
+a8:42:a1:db:0a:9a            Forweb_kl023637       10           {WPA2/PSK}        0
+56:91:e3:f5:55:15                                   3           {WPA2/PSK}        0
+a8:63:7d:c3:19:dd            Forweb_kl021642        9           {WPA2/PSK}        0
+aa:42:a1:2b:0a:9a                                  10           {WPA2/PSK}        0
+50:91:e3:f5:55:15                  Spiderman        3           {WPA2/PSK}        0
+78:98:e8:34:ff:fa            Forweb_kl021477        8           {WPA2/PSK}        0
+48:22:54:39:ec:96                  Avangarde       10           {WPA2/PSK}        0
+a2:78:27:95:35:ca                                  10           {WPA2/PSK}        0
+1c:61:b4:73:69:44               TP-Link_6944       11           {WPA2/PSK}        0
+64:64:4a:bc:fd:b9       Xiaomi_Lepsze_Piętro       11           {WPA2/PSK}        0
+6a:64:4a:bc:fd:b9                                  11                {OPN}        0
+1c:61:b4:4b:a3:37           TP-Link_Extender       11  {WPA2/PSK, WPA/PSK}        0
+90:9a:4a:98:f2:80               TP-Link_F280       11  {WPA2/PSK, WPA/PSK}        0
+78:98:e8:58:cc:c7               MeMyselfAndI       11           {WPA2/PSK}        0
+c0:25:2f:ab:b6:9a              MERCUSYS_B69A       11  {WPA2/PSK, WPA/PSK}        0
+7c:10:c9:33:0a:70                        AKB       11           {WPA2/PSK}        0
+0c:0e:76:db:42:2b            Forweb_kl022576        1           {WPA2/PSK}        0
+04:02:1f:46:a6:2c  PLAY Internet 4G LTE-A62C        9           {WPA2/PSK}        0
+40:ed:00:cc:30:36         KB-TP-Link_55C4_5G        5           {WPA2/PSK}        0
+a8:63:7d:f0:e2:63            Forweb_kl021902        5           {WPA2/PSK}        0
